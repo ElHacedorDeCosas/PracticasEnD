@@ -1,0 +1,14 @@
+{
+    "libs" : ["raylib"],
+    "lflags-posix" : ["-L."],
+    "lflags-osx" : ["-rpath", "@executable_path/"],
+    "lflags-linux" : ["-rpath=$$ORIGIN"],
+    "description" : "Un Super Ta-Te-Ti",
+    "name" : "super-ta-te-ti",
+    "targetPath" : "build",
+    "copyFiles" : ["libraylib.so.550", "libraylib.so.5.5.0", "libraylib.so"],
+    "dependencies" : {"raylib-d" : "~>5.5.1"},
+    "authors" : ["ElHacedorDeCosas"],
+    "copyright" : "Copyright © 2025, ElHacedorDeCosas",
+    "license" : "BSD-3-Clause"
+}
