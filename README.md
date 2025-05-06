@@ -2,6 +2,6 @@
 
 ## Juegos
 
-    [] Ta-Te-Ti
+    [-] Ta-Te-Ti
     [] Super Ta-Te-Ti
-    
+
