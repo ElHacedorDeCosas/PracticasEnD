@@ -1,110 +1,133 @@
-import std.stdio, std.conv, std.string, std.exception, std.random;
+import std.stdio;
+import std.conv;
+import std.string;
+import std.exception;
+import std.random;
 
-void msj(char[9] *ref_tab, char *ref_jug, char *ref_com) {
-    writefln("  %s  |  %s  |  %s  ", (*ref_tab)[0], (*ref_tab)[1], (*ref_tab)[2]);
+void msj(char[9]* refTab)
+{
+    writefln("  %s  |  %s  |  %s  ", (*refTab)[0], (*refTab)[1], (*refTab)[2]);
     writefln("-----|-----|-----");
-    writefln("  %s  |  %s  |  %s  ", (*ref_tab)[3], (*ref_tab)[4], (*ref_tab)[5]);
+    writefln("  %s  |  %s  |  %s  ", (*refTab)[3], (*refTab)[4], (*refTab)[5]);
     writefln("-----|-----|-----");
-    writefln("  %s  |  %s  |  %s  ", (*ref_tab)[6], (*ref_tab)[7], (*ref_tab)[8]);
+    writefln("  %s  |  %s  |  %s  ", (*refTab)[6], (*refTab)[7], (*refTab)[8]);
 }
 
-void turno_jugador(char[9] *ref_tab, char *ref_jug, char *ref_com, bool *ref_turno_jug){
+void turnoJugador(char[9]* refTab, char* refJug, char* refCom, bool* refTurnoJug)
+{
     // - Entrada por consola - //
     writeln("Por favor ingrese la pocición en la que quiere colocar su ficha (1-9)");
-    auto entrada_txt = readln();
+    auto entradaTxt = readln();
 
     // - Manejo de la entrada - //
-    if (isNumeric(chomp(entrada_txt)) == true) {
-        int entrada_int = to!int(chomp(entrada_txt));
-        if ((entrada_int - 1) >= 0 && (entrada_int - 1) < 9) {
-            if ((*ref_tab)[entrada_int - 1] != *ref_jug && (*ref_tab)[entrada_int - 1] != *ref_com) {
-                (*ref_tab)[entrada_int - 1] = *ref_jug;
-                *ref_turno_jug = false;
-            }else {
+    if (isNumeric(chomp(entradaTxt)) == true)
+    {
+        int entradaInt = to!int(chomp(entradaTxt));
+        if ((entradaInt - 1) >= 0 && (entradaInt - 1) < 9)
+        {
+            if ((*refTab)[entradaInt - 1] != *refJug && (*refTab)[entradaInt - 1] != *refCom)
+            {
+                (*refTab)[entradaInt - 1] = *refJug;
+                *refTurnoJug = false;
+            }else
+            {
                 writeln("Esa casilla ya está ocupada");
             }
-        }else {
+        }else
+        {
             writeln("El numero ingresado está por fuera de las casillas del tablero");
         }
-    }else {
+    }else
+    {
         writeln("Vuelva a ingresar su opción");
     }
 }
 
-void turno_computador(char[9] *ref_tab, char *ref_jug, char *ref_com, bool *ref_turno_com){
-
-    auto num_rand = uniform(1, 10);//1..9
-    if ((*ref_tab)[num_rand - 1] != *ref_jug && (*ref_tab)[num_rand - 1] != *ref_com) {
-        (*ref_tab)[num_rand - 1] = *ref_com;
-        *ref_turno_com = false;
-        writefln("Computador elige: %d", num_rand);
+void turnoComputador(char[9]* refTab, char* refJug, char* refCom, bool* refTurnoCom)
+{
+    auto numRand = uniform(1, 10);//1..9
+    if ((*refTab)[numRand - 1] != *refJug && (*refTab)[numRand - 1] != *refCom)
+    {
+        (*refTab)[numRand - 1] = *refCom;
+        *refTurnoCom = false;
+        writefln("Computador elige: %d", numRand);
     }
 }
 
-string verificar_victoria(char[9] *ref_tab, char *ref_jug, char *ref_com, bool *ref_victoria){
+string verificarVictoria(char[9]* refTab, char* refJug, char* refCom, bool* refVictoria)
+{
     string salida = "Error";
-    int no_espacio = 0;
+    int noEspacio = 0;
 
     // - Verificación de victoria del Jugador/Computador o Empate - //
-    if ((*ref_tab)[0] == *ref_jug && (*ref_tab)[1] == *ref_jug && (*ref_tab)[2] == *ref_jug || //Primera Linea
-        (*ref_tab)[3] == *ref_jug && (*ref_tab)[4] == *ref_jug && (*ref_tab)[5] == *ref_jug || //Segunda Linea
-        (*ref_tab)[6] == *ref_jug && (*ref_tab)[7] == *ref_jug && (*ref_tab)[8] == *ref_jug || //Tercera Linea
-        (*ref_tab)[0] == *ref_jug && (*ref_tab)[4] == *ref_jug && (*ref_tab)[8] == *ref_jug || //Diagonal Derecha
-        (*ref_tab)[2] == *ref_jug && (*ref_tab)[4] == *ref_jug && (*ref_tab)[6] == *ref_jug || //Diagonal Izquierda
-        (*ref_tab)[0] == *ref_jug && (*ref_tab)[3] == *ref_jug && (*ref_tab)[6] == *ref_jug || //Primera Columna
-        (*ref_tab)[1] == *ref_jug && (*ref_tab)[4] == *ref_jug && (*ref_tab)[7] == *ref_jug || //Segunda Columna
-        (*ref_tab)[2] == *ref_jug && (*ref_tab)[5] == *ref_jug && (*ref_tab)[8] == *ref_jug ){ //Tercera Columna
+    if ((*refTab)[0] == *refJug && (*refTab)[1] == *refJug && (*refTab)[2] == *refJug || //Primera Linea
+        (*refTab)[3] == *refJug && (*refTab)[4] == *refJug && (*refTab)[5] == *refJug || //Segunda Linea
+        (*refTab)[6] == *refJug && (*refTab)[7] == *refJug && (*refTab)[8] == *refJug || //Tercera Linea
+        (*refTab)[0] == *refJug && (*refTab)[4] == *refJug && (*refTab)[8] == *refJug || //Diagonal Derecha
+        (*refTab)[2] == *refJug && (*refTab)[4] == *refJug && (*refTab)[6] == *refJug || //Diagonal Izquierda
+        (*refTab)[0] == *refJug && (*refTab)[3] == *refJug && (*refTab)[6] == *refJug || //Primera Columna
+        (*refTab)[1] == *refJug && (*refTab)[4] == *refJug && (*refTab)[7] == *refJug || //Segunda Columna
+        (*refTab)[2] == *refJug && (*refTab)[5] == *refJug && (*refTab)[8] == *refJug )  //Tercera Columna
+    {
         salida = "¡VICTORIA DEL JUGADOR, FELICIDADES!";
-        *ref_victoria = true;
-    }else if ((*ref_tab)[0] == *ref_com && (*ref_tab)[1] == *ref_com && (*ref_tab)[2] == *ref_com || //Primera Linea
-              (*ref_tab)[3] == *ref_com && (*ref_tab)[4] == *ref_com && (*ref_tab)[5] == *ref_com || //Segunda Linea
-              (*ref_tab)[6] == *ref_com && (*ref_tab)[7] == *ref_com && (*ref_tab)[8] == *ref_com || //Tercera Linea
-              (*ref_tab)[0] == *ref_com && (*ref_tab)[4] == *ref_com && (*ref_tab)[8] == *ref_com || //Diagonal Derecha
-              (*ref_tab)[2] == *ref_com && (*ref_tab)[4] == *ref_com && (*ref_tab)[6] == *ref_com || //Diagonal Izquierda
-              (*ref_tab)[0] == *ref_com && (*ref_tab)[3] == *ref_com && (*ref_tab)[6] == *ref_com || //Primera Columna
-              (*ref_tab)[1] == *ref_com && (*ref_tab)[4] == *ref_com && (*ref_tab)[7] == *ref_com || //Segunda Columna
-              (*ref_tab)[2] == *ref_com && (*ref_tab)[5] == *ref_com && (*ref_tab)[8] == *ref_com ){ //Tercera Columna
+        *refVictoria = true;
+    }else if ((*refTab)[0] == *refCom && (*refTab)[1] == *refCom && (*refTab)[2] == *refCom || //Primera Linea
+              (*refTab)[3] == *refCom && (*refTab)[4] == *refCom && (*refTab)[5] == *refCom || //Segunda Linea
+              (*refTab)[6] == *refCom && (*refTab)[7] == *refCom && (*refTab)[8] == *refCom || //Tercera Linea
+              (*refTab)[0] == *refCom && (*refTab)[4] == *refCom && (*refTab)[8] == *refCom || //Diagonal Derecha
+              (*refTab)[2] == *refCom && (*refTab)[4] == *refCom && (*refTab)[6] == *refCom || //Diagonal Izquierda
+              (*refTab)[0] == *refCom && (*refTab)[3] == *refCom && (*refTab)[6] == *refCom || //Primera Columna
+              (*refTab)[1] == *refCom && (*refTab)[4] == *refCom && (*refTab)[7] == *refCom || //Segunda Columna
+              (*refTab)[2] == *refCom && (*refTab)[5] == *refCom && (*refTab)[8] == *refCom )  //Tercera Columna
+    {
         salida = "¡VICTORIA DEL COMPUTADOR, MEJOR SUERTE PARA LA PROXIMA!";
-        *ref_victoria = true;
-    }else {
-        foreach(caracter; *ref_tab) {
-            if (caracter != ' ') {
-                    no_espacio++;
-                }
+        *refVictoria = true;
+    }else
+    {
+        foreach(caracter; *refTab)
+        {
+            if (caracter != ' ')
+            {
+                noEspacio++;
+            }
         }
-        if (no_espacio == 9) {
+        if (noEspacio == 9)
+        {
             salida = "¡EMPATE!";
-            *ref_victoria = true;
+            *refVictoria = true;
         }
     }
-    no_espacio = 0;
+    noEspacio = 0;
     return salida;
 }
 
-void main(){
-
+void main()
+{
     char jugador = 'O';
     char computador = 'X';
     char[9] tablero = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
-    bool es_victoria = false;
+    bool esVictoria = false;
     string ganador;
-    bool es_turno_jugador = false;
-    bool es_turno_computador = false;
+    bool esTurnoJugador = false;
+    bool esTurnoComputador = false;
 
     writeln("___Ta-Te-Ti___");
-    while (es_victoria == false) {
-        msj(&tablero, &jugador, &computador);
-        es_turno_jugador = true;
-        while (es_turno_jugador == true) {
-            turno_jugador(&tablero, &jugador, &computador, &es_turno_jugador);
+    while (esVictoria == false)
+    {
+        msj(&tablero);
+        esTurnoJugador = true;
+        while (esTurnoJugador == true)
+        {
+            turnoJugador(&tablero, &jugador, &computador, &esTurnoJugador);
         }
-        ganador = verificar_victoria(&tablero, &jugador, &computador, &es_victoria);
-        es_turno_computador = true;
-        while (es_turno_computador == true) {
-            turno_computador(&tablero, &jugador, &computador, &es_turno_computador);
+        ganador = verificarVictoria(&tablero, &jugador, &computador, &esVictoria);
+        esTurnoComputador = true;
+        while (esTurnoComputador == true)
+        {
+            turnoComputador(&tablero, &jugador, &computador, &esTurnoComputador);
         }
-        ganador = verificar_victoria(&tablero, &jugador, &computador, &es_victoria);
+        ganador = verificarVictoria(&tablero, &jugador, &computador, &esVictoria);
     }
-    msj(&tablero, &jugador, &computador);
+    msj(&tablero);
     writeln(ganador);
 }
