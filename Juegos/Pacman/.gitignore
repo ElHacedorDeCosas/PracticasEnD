@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/cubo
+cubo.so
+cubo.dylib
+cubo.dll
+cubo.a
+cubo.lib
+cubo-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
