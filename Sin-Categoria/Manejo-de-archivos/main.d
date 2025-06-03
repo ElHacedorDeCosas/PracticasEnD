@@ -1,11 +1,15 @@
 import std.stdio;
 import std.file;
+import std.conv;
 
 void recibirArchivos(ref string[] refArgs, ref File[] refArchivos)
 {
     foreach (arg; refArgs[1..$])
     {
-        refArchivos ~= File(arg, "w");
+        if (exists(arg))
+        {
+            refArchivos ~= File(arg, "w");
+        }
     }
 }
 
@@ -38,6 +42,11 @@ int main(string[] args)
         }
     }
 
+    foreach (arch; archivos)
+    {
+        writeln(read(arch).byChar);
+    }
 
-    return 69;
+
+    return 0;
 }

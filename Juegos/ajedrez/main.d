@@ -23,20 +23,20 @@ struct Pieza
 {
     Color color;
     TipoPieza tipoPieza;
-    string nombre;
+    string id;
 
-    this()
+    this(Color c, TipoPieza p)
     {
-        this.nombre = format("%s%s", to!string(c), to!string(t));
+        this.color = c;
+        this.tipoPieza = p;
+        this.id = format("%d%d", to!int(c), to!int(p));
     }
 }
 
 void main()
 {
-    Pieza p;
-    p.color = Color.blanco;
-    p.tipoPieza = TipoPieza.peon;
+    auto p = Pieza(Color.blanco, TipoPieza.peon);
 
-    writeln(p.nombre);
+    writeln(p.id);
 
 }

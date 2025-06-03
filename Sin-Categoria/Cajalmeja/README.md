@@ -4,8 +4,8 @@ Cajalmeja
 
 Rquisitos
 -----------
-- [DMD](https://dlang.org/download.html)
-- [Linux](https://es.wikipedia.org/wiki/GNU/Linux)
+- [Compilador de D](https://dlang.org/download.html)
+- [Linux](https://es.wikipedia.org/wiki/GNU/Linux) (tal vez en un futuro un sitema tipo UNIX, ya veré)
 
 Referencias
 -----------
