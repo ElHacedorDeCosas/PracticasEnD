@@ -42,10 +42,10 @@ int main(string[] args)
         }
     }
 
-    foreach (arch; archivos)
-    {
-        writeln(read(arch).byChar);
-    }
+    // foreach (arch; archivos)
+    // {
+    //     writeln(read(arch).byChar);
+    // }
 
 
     return 0;
